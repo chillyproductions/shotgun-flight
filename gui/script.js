@@ -1,6 +1,9 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
+canvas.height = document.body.clientHeight * 0.9;
+canvas.width = document.body.clientHeight * 0.9;
+
 const cowBoyImg = new Image();
 cowBoyImg.src = "./assets/cowboy.png";
 const shotGunImg = new Image();
@@ -37,10 +40,7 @@ document.addEventListener('mousemove',(evt)=>{
 
 
 function start(){
-    player = new Player((canvas.width-playerSize)/2 ,(canvas.height-playerSize)/2,playerSize);
-    score = -1;
-    resetble = false;
-    updateScore();
+    resetValues();
 
     for(let i = 0; i < 2; i++)
         bullets[i] = createNewBullet(i);
@@ -61,10 +61,25 @@ function start(){
             clearInterval(loop);
             alert('u dead:/ score: ' + score);
             resetable = true;
+            document.getElementById('bullets').innerHTML = "You died:/ <br> press space to reset";
+            document.getElementById('bullets').style.color = 'red';
+            document.getElementById('bullets').style.opacity = 1;
+            document.getElementById('bullets').style.fontSize = '75px';
         }
         
         timer = getTime();
     },0)
+}
+
+function resetValues(){
+    player = new Player((canvas.width-playerSize)/2 ,(canvas.height-playerSize)/2,playerSize);
+    score = -1;
+    resetble = false;
+    document.getElementById('bullets').style.color = 'black';
+    document.getElementById('bullets').style.opacity = 0.5;
+    document.getElementById('bullets').style.fontSize = '150px';
+    updateScore();
+    updateBullets();
 }
 
 function updateBullets(){
