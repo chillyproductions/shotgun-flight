@@ -1,0 +1,12 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#bullets {
+  position: absolute;
+  font-size: 150px;
+  top: 30vh;
+  opacity: 0.5;
+}
