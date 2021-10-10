@@ -1,9 +1,6 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
-canvas.height = document.body.clientHeight * 0.9;
-canvas.width = document.body.clientHeight * 0.9;
-
 const cowBoyImg = new Image();
 cowBoyImg.src = "./assets/cowboy.png";
 const shotGunImg = new Image();
