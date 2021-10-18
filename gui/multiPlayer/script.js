@@ -23,7 +23,7 @@ var loop;
 
 function shoot(evt){
     player.shoot(evt.pageX - canvas.getBoundingClientRect().x, evt.pageY - canvas.getBoundingClientRect().y);
-    socket.emit('player-move', {position:[this.x,this.y],speed:this.speed});
+    socket.emit('player-move', {position:[player.x,player.y],speed:player.speed});
 }
 function change(evt){
     player.changeAng(evt.pageX - canvas.getBoundingClientRect().x, evt.pageY - canvas.getBoundingClientRect().y);

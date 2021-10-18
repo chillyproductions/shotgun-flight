@@ -28,10 +28,10 @@ io.on('connection', socket=>{
         io.to(players[socket.id].room).emit('start',rooms[players[socket.id].room]);
     })
     
-    socket.on('player-move',({position,speed})=>{
+    socket.on('player-move',(data)=>{
         if(!players[socket.id]) return;
         
-        socket.to(players[socket.id].room).emit('player-move',{position:position,speed:speed});
+        socket.to(players[socket.id].room).emit('player-move',data);
     })
     
     socket.on('death', ()=>{
