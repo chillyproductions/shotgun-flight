@@ -115,10 +115,12 @@ class Player extends rect{
     speed = {x:0, y:0};
     bullets = 5;
     gunAng = 0;
+    img;
 
-    constructor(x,y,size){
+    constructor(x,y,size,img){
         super(x,y,size,size);
         this.size = size;
+        this.img = img;
     }
 
     shoot(x,y){
@@ -140,12 +142,12 @@ class Player extends rect{
     }
 
     draw(){
-        ctx.drawImage(cowBoyImg,this.x,this.y,this.size,this.size);
+        ctx.drawImage(this.img,this.x,this.y,this.size,this.size);
         if(this.x + this.size > canvas.width)
-            ctx.drawImage(cowBoyImg,this.x - canvas.width,this.y,this.size,this.size);
+            ctx.drawImage(this.img,this.x - canvas.width,this.y,this.size,this.size);
             
         else if(this.x < 0)
-            ctx.drawImage(cowBoyImg,canvas.width+this.x,this.y,this.size,this.size);
+            ctx.drawImage(this.img,canvas.width+this.x,this.y,this.size,this.size);
         
         ctx.save();
         ctx.translate(this.x + this.size,this.y + this.size/2);

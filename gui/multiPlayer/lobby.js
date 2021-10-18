@@ -16,13 +16,15 @@ function start(){
             bullets.push(new Bullet(bullet[0],bullet[1],bullet[2]));
         }
         if(localStorage.getItem('name') == roomData.players[0].name){
-            player = new Player(roomData.players[0].position.x,roomData.players[0].position.y,playerSize);
-            enemyPlayer = new Player(roomData.players[1].position.x,roomData.players[1].position.y,playerSize);
+            player = new Player(roomData.players[0].position.x,roomData.players[0].position.y,playerSize,cowBoyImg);
+            enemyPlayer = new Player(roomData.players[1].position.x,roomData.players[1].position.y,playerSize,purpelCowBoyImg);
         }
         else{
-            enemyPlayer = new Player(roomData.players[0].position.x,roomData.players[0].position.y,playerSize);
-            player = new Player(roomData.players[1].position.x,roomData.players[1].position.y,playerSize);
+            player = new Player(roomData.players[1].position.x,roomData.players[1].position.y,playerSize,cowBoyImg);
+            enemyPlayer = new Player(roomData.players[0].position.x,roomData.players[0].position.y,playerSize,purpelCowBoyImg);
         }
+
+        document.removeEventListener('keypress',checkStart);
         startGame();
     })
 
@@ -38,10 +40,11 @@ function start(){
 
     socket.on('death', ()=>{
         clearInterval(loop);
-        document.getElementById('bullets').innerHTML = "You win:) <br> refresh for rematch";
+        document.getElementById('bullets').innerHTML = "You win:) <br> space for rematch";
         document.getElementById('bullets').style.color = 'red';
         document.getElementById('bullets').style.opacity = 1;
         document.getElementById('bullets').style.fontSize = '75px';
+        document.addEventListener('keypress',checkStart);
         stopListening();
     })
 

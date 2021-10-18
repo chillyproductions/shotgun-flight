@@ -36,7 +36,11 @@ document.addEventListener('mousemove',(evt)=>{
 })
 
 
-function start(){
+async function start(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    player.draw();
+    enemyPlayer.draw();
+    await countDown();
     resetValues();
 
     for(let i = 0; i < 2; i++)
@@ -68,13 +72,23 @@ function start(){
     },0)
 }
 
+async function countDown(){
+    document.getElementById('bullets').style.color = 'black';
+    document.getElementById('bullets').style.opacity = 0.5;
+    document.getElementById('bullets').style.fontSize = '150px';
+
+    document.getElementById('bullets').innerText = "3";
+    await sleep(1000);
+    document.getElementById('bullets').innerText = "2";
+    await sleep(1000);
+    document.getElementById('bullets').innerText = "1";
+    await sleep(1000);
+}
+
 function resetValues(){
     player = new Player((canvas.width-playerSize)/2 ,(canvas.height-playerSize)/2,playerSize);
     score = -1;
     resetble = false;
-    document.getElementById('bullets').style.color = 'black';
-    document.getElementById('bullets').style.opacity = 0.5;
-    document.getElementById('bullets').style.fontSize = '150px';
     updateScore();
     updateBullets();
 }
@@ -97,6 +111,10 @@ function createNewBullet(id){
 
 function getTime(){
     return new Date().getTime();
+}
+
+function sleep(time){
+    return new Promise(resolve => setTimeout(resolve,time));
 }
 
 start();

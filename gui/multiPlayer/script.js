@@ -3,6 +3,8 @@ const ctx = canvas.getContext('2d');
 
 const cowBoyImg = new Image();
 cowBoyImg.src = "../assets/cowboy.png";
+const purpelCowBoyImg = new Image();
+purpelCowBoyImg.src = "../assets/purpleCowboy.png";
 const shotGunImg = new Image();
 shotGunImg.src = "../assets/shotgun.png";
 const bulletImg = new Image();
@@ -40,7 +42,16 @@ function stopListening(){
     document.removeEventListener('mousemove',change);
 }
 
-function startGame(){
+function checkStart({key}){
+    if(key == " ")
+        socket.emit('start');
+}
+
+async function startGame(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    player.draw();
+    enemyPlayer.draw();
+    await countDown();
     resetValues();
 
     var timer = getTime();
@@ -49,8 +60,8 @@ function startGame(){
     
         player.move(getTime()-timer);
         player.draw();
-        enemyPlayer.draw();
         enemyPlayer.move(getTime()-timer);
+        enemyPlayer.draw();
         
         for(let bullet of bullets){
             if(!bullet) continue;
@@ -60,16 +71,31 @@ function startGame(){
 
         if(player.death()){
             clearInterval(loop);
-            document.getElementById('bullets').innerHTML = "You lost:( <br> refresh for rematch";
+            document.getElementById('bullets').innerHTML = "You lost:( <br> space for rematch";
             document.getElementById('bullets').style.color = 'red';
             document.getElementById('bullets').style.opacity = 1;
             document.getElementById('bullets').style.fontSize = '75px';
             stopListening();
+            
+            document.addEventListener('keypress',checkStart);
             socket.emit('death');
         }
         
         timer = getTime();
     },0)
+}
+
+async function countDown(){
+    document.getElementById('bullets').style.color = 'black';
+    document.getElementById('bullets').style.opacity = 0.5;
+    document.getElementById('bullets').style.fontSize = '150px';
+
+    document.getElementById('bullets').innerText = "3";
+    await sleep(1000);
+    document.getElementById('bullets').innerText = "2";
+    await sleep(1000);
+    document.getElementById('bullets').innerText = "1";
+    await sleep(1000);
 }
 
 function resetValues(){
@@ -88,4 +114,6 @@ function getTime(){
     return new Date().getTime();
 }
 
-
+function sleep(time){
+    return new Promise(resolve => setTimeout(resolve,time));
+}
