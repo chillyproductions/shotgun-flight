@@ -26,9 +26,10 @@ function start(){
         startGame();
     })
 
-    socket.on('player-move',position=>{
+    socket.on('player-move',({position,speed})=>{
         enemyPlayer.x = position[0];
         enemyPlayer.y = position[1];
+        enemyPlayer.speed = speed;
     })
 
     socket.on('bullet-eat', (bullet)=>{

@@ -168,7 +168,7 @@ class Player extends rect{
         else if(this.x + this.size <= 0)
             this.x = canvas.width -this.size;
 
-        socket.emit('player-move', [this.x,this.y]);
+        socket.emit('player-move', {position:[this.x,this.y],speed:this.speed});
     }
 
     death(){
