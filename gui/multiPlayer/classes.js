@@ -104,6 +104,7 @@ class Bullet extends rect{
             player.bullets++;
             updateBullets();
             shellSound.play();
+            bullets[this.id] = null;
             socket.emit('bullet-eat', this.id);
         }
     }

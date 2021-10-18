@@ -49,8 +49,10 @@ function startGame(){
         player.move(getTime()-timer);
         player.draw();
         enemyPlayer.draw();
-
+        enemyPlayer.move(getTime()-timer);
+        
         for(let bullet of bullets){
+            if(!bullet) continue;
             bullet.draw();
             bullet.collision();
         }
