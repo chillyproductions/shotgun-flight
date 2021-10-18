@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="lobby-container">
+        <div id="id-container"></div>
+        <div id="player-container"></div>
+        <button onclick="emitStart()">start</button>
+    </div> 
+
+    <div id="active-game-container" style="display:none">
+        <div id="bullets">5</div>
+        <canvas width="750" height="750" style="border: 1px solid;"></canvas>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="lobby.js"></script>
+    <script src="classes.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
