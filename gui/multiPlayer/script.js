@@ -60,7 +60,7 @@ function startGame(){
 
         if(player.death()){
             clearInterval(loop);
-            document.getElementById('bullets').innerHTML = "You lost:(";
+            document.getElementById('bullets').innerHTML = "You lost:( <br> refresh for rematch";
             document.getElementById('bullets').style.color = 'red';
             document.getElementById('bullets').style.opacity = 1;
             document.getElementById('bullets').style.fontSize = '75px';

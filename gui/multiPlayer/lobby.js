@@ -38,7 +38,7 @@ function start(){
 
     socket.on('death', ()=>{
         clearInterval(loop);
-        document.getElementById('bullets').innerHTML = "You win:)";
+        document.getElementById('bullets').innerHTML = "You win:) <br> refresh for rematch";
         document.getElementById('bullets').style.color = 'red';
         document.getElementById('bullets').style.opacity = 1;
         document.getElementById('bullets').style.fontSize = '75px';
