@@ -39,7 +39,6 @@ document.addEventListener('mousemove',(evt)=>{
 async function start(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     player.draw();
-    enemyPlayer.draw();
     await countDown();
     resetValues();
 
