@@ -53,7 +53,14 @@ function start(){
         document.getElementById('scores').innerHTML = `<div>${players[0].name}: ${players[0].score}</div><div>${players[1].name}: ${players[1].score}</div>`;
     })
 
-    document.getElementById('id-container').innerText = localStorage.getItem('room');
+    var room = localStorage.getItem('room');
+    if(room == "LIGMQ"){
+        document.getElementById('id-container').innerText = "Ligma balls lmaooo";
+        document.getElementById('id-container').style.fontSize = "100px";
+    }
+
+    else    
+        document.getElementById('id-container').innerText = room;
     socket.emit('join-room',({name:localStorage.getItem("name"),room:localStorage.getItem('room')}));
 }
 
