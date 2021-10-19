@@ -15,9 +15,9 @@ io.on('connection', socket=>{
             return
         
         if(rooms[room].players.length == 1)
-            rooms[room].players.push({name:name,position:{x:600,y:400}});
+            rooms[room].players.push({name:name,position:{x:600,y:400},score:0});
         else if(rooms[room].players.length == 0)
-            rooms[room].players.push({name:name,position:{x:200,y:400}});
+            rooms[room].players.push({name:name,position:{x:200,y:400},score:0});
 
         io.to(room).emit('new-players',rooms[room].players);
     })
@@ -37,7 +37,12 @@ io.on('connection', socket=>{
     socket.on('death', ()=>{
         if(!players[socket.id]) return;
         
+        for(var player of rooms[players[socket.id].room].players)
+            if(player.name != players[socket.id].name)
+                player.score++;
+        
         socket.to(players[socket.id].room).emit('death');
+        io.to(players[socket.id].room).emit('get-scores',rooms[players[socket.id].room].players);
     })
     
     socket.on('bullet-eat', (id)=>{
